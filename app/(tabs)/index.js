@@ -1,4 +1,6 @@
+import { signOut } from 'firebase/auth';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, Button } from 'react-native';
+import { auth } from '../../firebaseConfig';
 
 export default function Index() {
   const generateQrCode = () => {

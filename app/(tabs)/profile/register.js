@@ -17,6 +17,7 @@ export default function Register({ navigation }) {
     
           // Add user to Firestore with role
           await setDoc(doc(db, 'users', user.uid), {
+            uid: user.uid,
             email: user.email,
             name: 'User Name', // Replace with actual user name
             role: 'user' // or 'admin', 'moderator', etc.
@@ -55,7 +56,7 @@ export default function Register({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         className="w-full p-4 bg-gray-300 rounded-lg"
-        onPress={() => navigation.navigate('SignIn')}
+        onPress={() => navigation.goBack()}
       >
         <Text className="text-center text-gray-800 text-lg font-semibold">Sign In</Text>
       </TouchableOpacity>

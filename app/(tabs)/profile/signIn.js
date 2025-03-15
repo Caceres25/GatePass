@@ -1,13 +1,32 @@
 import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { auth, db } from '../../../firebaseConfig';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { UserContext } from '../../context/UserContext';
+import { doc, getDoc } from 'firebase/firestore';
 
 export default function SignIn({ navigation }) {
 const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const { setUser, setIsAuthenticated } = useContext(UserContext);
 
 
     const handleSignIn = async () => {
         console.log("signin")
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const user = userCredential.user;
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
+          if (!userDoc.exists()) {
+            alert('Incorrect email or password');
+            return;
+          }
+          setUser(userDoc.data());
+          setIsAuthenticated(true);
+          navigation.navigate('Profile');
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (

@@ -48,15 +48,6 @@ export default function TabLayout() {
         ),
       }}
     />
-      <Tabs.Screen
-        name="register"
-        options={{
-          title: 'Register',
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons name={focused ? 'accessibility' : 'accessibility-outline'} color={color} size={24}/>
-          ),
-        }}
-      />
     </Tabs>
   );
 }

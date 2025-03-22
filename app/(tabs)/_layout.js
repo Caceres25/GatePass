@@ -1,11 +1,14 @@
 import { Tabs } from 'expo-router';
 
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useContext } from 'react';
+import { UserContext } from '../context/UserContext';
 
 
 
 
 export default function TabLayout() {
+  const { user } = useContext(UserContext);
 
   return (
     <Tabs
@@ -47,6 +50,16 @@ export default function TabLayout() {
           <Ionicons name={focused ? 'person-circle' : 'person-circle-outline'} color={color} size={24}/>
         ),
       }}
+    />
+    <Tabs.Screen
+    name="guard"
+    redirect={user?.role !== 'guard'}
+    options={{
+      title: 'Guard',
+      tabBarIcon: ({ color, focused }) => (
+        <Ionicons name={focused ? 'shield-checkmark' : 'shield-checkmark-outline'} color={color} size={24}/>
+      ),
+    }}
     />
     </Tabs>
   );

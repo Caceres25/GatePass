@@ -1,12 +1,22 @@
 import { signOut } from 'firebase/auth';
 import { View, Text, StyleSheet, ScrollView, SafeAreaView, Button } from 'react-native';
 import { auth } from '../../firebaseConfig';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../context/UserContext';
 
 export default function Index() {
+
+  const { user } = useContext(UserContext);
+
   const generateQrCode = () => {
     const qrData = 'Your QR Code Data'; // Replace with your actual data
     console.log('QR Code generated:', qrData);
   };
+
+  useEffect(() => {
+    console.log(user);
+    console.log("===============INDEX=======================")
+  } , []);
 
   return (
     <View className="flex-1 bg-gray-100 p-5">
